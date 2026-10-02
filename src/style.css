@@ -1,0 +1,288 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── Override Tailwind blue scale → AirportSpace teal palette ──── */
+@theme {
+  --color-blue-50:  #f0fdfe;
+  --color-blue-100: #ccf7fa;
+  --color-blue-200: #99eef5;
+  --color-blue-300: #55e0ec;
+  --color-blue-400: #0EB4BE;
+  --color-blue-500: #0EB4BE;
+  --color-blue-600: #0a8f97;
+  --color-blue-700: #086e75;
+  --color-blue-800: #074f55;
+  --color-blue-900: #0a2326;
+  --color-blue-950: #071a1c;
+}
+
+/* ─── AirportSpace color tokens ─────────────────────────── */
+:root {
+  --color-primary:       #0EB4BE;
+  --color-primary-light: #2dccd6;
+  --color-primary-dark:  #0a8f97;
+  --color-sidebar-bg:    #071a1c;
+  --color-sidebar-alt:   #0a2326;
+  --color-sidebar-border:#134045;
+  --color-accent-cyan:   #7ef5fb;
+  --color-accent-cyan-soft: #ccf7fa;
+  --color-success:       #12b76a;
+  --color-warning:       #f59e0b;
+  --color-danger:        #d92d20;
+  --color-bg:            #edf6fb;
+  --color-surface:       #ffffff;
+  --color-border:        #e2e8f0;
+  --color-text:          #0f172a;
+  --color-text-secondary:#334155;
+  --color-text-muted:    #64748b;
+  --color-border-strong: #cbd5e1;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  /* Glass morphism */
+  --glass-bg:          rgba(255,255,255,0.68);
+  --glass-bg-strong:   rgba(255,255,255,0.85);
+  --glass-border:      rgba(255,255,255,0.55);
+  --glass-blur:        18px;
+  --glass-shadow:      0 1px 0 0 rgba(255,255,255,0.6) inset;
+}
+
+@layer base {
+  * {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  }
+  body {
+    background-color: var(--color-bg);
+  }
+}
+
+/* ─── Page transitions ─────────────────────────────────── */
+.page-enter-active {
+  transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-leave-active {
+  transition: opacity 0.18s ease, transform 0.2s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* ─── Modal ────────────────────────────────────────────── */
+.modal-enter-active {
+  transition: opacity 0.22s ease;
+}
+.modal-leave-active {
+  transition: opacity 0.18s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-panel-enter-active {
+  transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.modal-panel-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.modal-panel-enter-from {
+  opacity: 0;
+  transform: scale(0.94) translateY(8px);
+}
+.modal-panel-leave-to {
+  opacity: 0;
+  transform: scale(0.96) translateY(4px);
+}
+
+/* ─── List stagger ─────────────────────────────────────── */
+.list-item-enter-active {
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.list-item-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  position: absolute;
+}
+.list-item-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.list-item-leave-to {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+/* ─── Slide down (mobile menu, dropdowns) ─────────────── */
+.slide-down-enter-active {
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), max-height 0.25s ease;
+  overflow: hidden;
+}
+.slide-down-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease, max-height 0.2s ease;
+  overflow: hidden;
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+}
+.slide-down-enter-to,
+.slide-down-leave-from {
+  max-height: 500px;
+}
+
+/* ─── Fade ─────────────────────────────────────────────── */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* ─── Keyframe animations ──────────────────────────────── */
+@keyframes slideUpIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.5); }
+  70%  { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Animation utilities ──────────────────────────────── */
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUpIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease both;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-pop {
+    animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .animate-float-up {
+    animation: floatUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Stagger delays */
+  .delay-50  { animation-delay: 50ms; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-250 { animation-delay: 250ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+
+  .gradient-navy {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1.5px solid rgba(14,180,190,0.18);
+  }
+  .gradient-navy-flat {
+    background: #0EB4BE;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #0a8f97, #0EB4BE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glass {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .glass-cyan {
+    background: rgba(92, 233, 254, 0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(92, 233, 254, 0.2);
+  }
+  /* Accent blob decorations (background blobs like SkyVote) */
+  .blob-blue  { background: #d4e3ff; }
+  .blob-cyan  { background: #98f0ff; }
+  .accent-cyan { color: #5ce9fe; }
+  .bg-primary  { background-color: var(--color-primary); }
+  .text-primary { color: var(--color-primary); }
+  .border-primary { border-color: var(--color-primary); }
+  .ring-primary { --tw-ring-color: var(--color-primary); }
+  .card-lift {
+    transition: box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-lift:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+  }
+  .card-lift:hover .card-icon {
+    transform: scale(1.08);
+  }
+  .card-icon {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* Button press */
+  .btn-press {
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+  .btn-press:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+}
+
+/* ─── Table row filter transition ─────────────────────── */
+.row-enter-active {
+  transition: opacity 0.28s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.row-leave-active {
+  transition: opacity 0.18s ease;
+}
+.row-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.row-leave-to {
+  opacity: 0;
+}
+
+/* ─── Accessibility: respect reduced motion ────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
