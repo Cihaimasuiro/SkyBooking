@@ -1,88 +1,102 @@
-# App Jurnal Kegiatan PKL
+# SkyBooking 🏨
 
-Aplikasi Jurnal Kegiatan Praktik Kerja Lapangan (PKL) yang dikembangkan menggunakan **Laravel 13**. Aplikasi ini dirancang dengan prinsip arsitektur tingkat enterprise untuk memastikan *maintainability*, *scalability*, dan *clean code*.
+<p align="center">
+  A modern, enterprise-grade room and event booking management system built with Laravel, Vue 3, and Inertia.js.
+</p>
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" />
+  <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" alt="Vue.js" />
+  <img src="https://img.shields.io/badge/Inertia.js-9553E9?style=for-the-badge&logo=inertia&logoColor=white" alt="Inertia.js" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+</p>
 
-## 🏗️ Arsitektur Sistem
+## Table of Contents
+- [About](#about)
+- [Architecture](#architecture)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-Aplikasi ini menggunakan pola arsitektur **Modular Monolith + Pragmatic Layered Architecture**.
-Kami memisahkan batas domain berdasarkan modul bisnis utama, memisahkan *business logic* dari HTTP Layer (Controllers), dan mempertahankan kontrol ketat pada *database operations*.
+## About
+SkyBooking is a comprehensive solution designed to simplify the management of physical spaces and events. Whether you are managing office meeting rooms, university study spaces, or convention center halls, SkyBooking provides a seamless, real-time interface for users to discover and book resources.
 
-### 🔄 Alur Permintaan (Request Flow)
-Secara default, alur permintaan HTTP mematuhi lapisan berikut:
+The project recently underwent a major architectural migration from a client-side Single Page Application (SPA) to a **Modular Monolith** driven by Laravel and Inertia.js, ensuring maximum performance, security, and developer ergonomics.
 
-```text
-HTTP Request
-    ↓
-Route
-    ↓
-FormRequest (Validasi Otorisasi & Input)
-    ↓
-Controller (Layer Tipis)
-    ↓
-Service / Action (Business Logic & Transaksi Database)
-    ↓
-Query / Eloquent Model (Pengambilan Data)
-    ↓
-Database
-    ↓
-Resource / Response (Format API)
-```
+## Architecture
+This project adheres to strict **Enterprise Development Guidelines** (detailed in `AGENTS.md`). 
+- **Backend:** Laravel (Modular Monolith pattern). Logic is isolated into `Domain` contexts (`app/Domain/User`, `app/Domain/Booking`, etc.).
+- **Frontend:** Vue 3 via Inertia.js. Client-side state management (like Pinia) has been completely removed in favor of Laravel's native session state and server-driven props.
+- **Database:** SQLite (default configuration for easy setup).
 
-Untuk pekerjaan yang berjalan asinkron (background jobs):
-```text
-Controller / Service  →  Job  →  Queue  →  Worker / Horizon
-```
+## Features
+- ✨ **Real-time Availability:** Instantly see which rooms are free and which are booked.
+- 🚀 **Server-Driven UI:** Lightning-fast page loads leveraging Inertia.js without the overhead of client-side routing.
+- 🔒 **Secure Authentication:** Native Laravel session-based authentication.
+- 🏢 **Admin Dashboard:** Comprehensive view of all system bookings and user activity.
+- 📦 **Modular Domains:** Highly maintainable backend code organized by business domains (User, Room, Booking, Event).
 
-Untuk alur *side-effects* (efek samping):
-```text
-Business Operation  →  Event  →  Listener
-```
+## Getting Started
 
----
+### Prerequisites
+- PHP 8.2+
+- Node.js (v20+)
+- NPM or Yarn
+- Composer
 
-## 📂 Struktur Direktori
+### Installation
 
-Kode aplikasi diatur berdasarkan batas Modul Bisnis (*Business Module*) di dalam folder `app/Domain/`. 
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/SkyBooking.git
+   cd SkyBooking
+   ```
 
-```text
-app/
-├── Domain/
-│   ├── User/             # Modul Bisnis User
-│   │   ├── Actions/      # Eksekusi operasi bisnis tunggal (misal: ApproveUser)
-│   │   ├── DTOs/         # Data Transfer Objects untuk input antar layer yang type-safe
-│   │   ├── Models/       # Eloquent Models, Relations, & Casts 
-│   │   ├── Queries/      # Kueri kompleks atau reusable (Builder Pattern)
-│   │   └── Services/     # Alur bisnis yang melibatkan beberapa langkah/transaksi
-│   │
-│   └── [Modul Lainnya]/  # Modul jurnal, dll.
-│
-├── Http/
-│   ├── Controllers/      # Hanya untuk memproses Request dan melempar ke Service
-│   ├── Requests/         # Form Requests (Validasi API)
-│   └── Resources/        # API Resources (Format JSON Response)
-│
-└── Jobs/, Events/, Listeners/ ... dsb.
-```
+2. **Install PHP Dependencies:**
+   ```bash
+   composer install
+   ```
 
----
+3. **Install Node Dependencies:**
+   ```bash
+   npm install
+   ```
 
-## 📋 Prinsip Pengembangan
+4. **Environment Setup:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-1. **Thin Controllers:** Controller dilarang memuat *business logic* (tidak boleh lebih dari sekadar menerima request, memanggil service/action, dan me-return response).
-2. **DTO (Data Transfer Object):** Data request dari luar akan diparsing menjadi DTO yang *strongly-typed* sebelum masuk ke layer Service.
-3. **Pemisahan Kueri:** Kueri kompleks harus diletakkan pada kelas `Queries/`, bukan di dalam model atau controller.
-4. **Validasi Sentralisasi:** Seluruh validasi input dan pengecekan otorisasi sederhana diletakkan di dalam `FormRequest`.
-5. **No N+1 Problem:** Selalu evaluasi kueri Eloquent untuk menghindari N+1 (*Eager Load* relasi sesuai kebutuhan).
+5. **Database Setup:**
+   Ensure `DB_CONNECTION=sqlite` is set in your `.env`.
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate --seed
+   ```
 
----
+6. **Build Frontend Assets:**
+   ```bash
+   npm run build
+   ```
+   *(For development, you can use `npm run dev` in a separate terminal)*
 
-## 🚀 Setup & Instalasi
+7. **Start the Server:**
+   ```bash
+   php artisan serve
+   ```
 
-1. Clone repositori ini.
-2. Jalankan `composer install`.
-3. Salin `.env.example` ke `.env` dan konfigurasikan akses *database*.
-4. Jalankan `php artisan key:generate`.
-5. Jalankan `php artisan migrate:fresh --seed` (jika menggunakan instalasi awal).
-6. Jalankan `php artisan serve` untuk memulai *development server*.
+## Usage
+Once the server is running, navigate to `http://localhost:8000` in your browser. 
+- You can browse available rooms as a guest.
+- To book a room, log in using the credentials generated by the seeders (or register a new account).
+- Admins can access the dashboard via `/admin`.
+
+## Contributing
+We enforce a strict coding standard on this project. Before contributing, you **must** read the `AGENTS.md` file located in the root directory. It contains mandatory engineering guidelines regarding our Modular Monolith architecture, controller thickness, database query rules, and more.
+
+## License
+Distributed under the [MIT License](LICENSE). See `LICENSE` for more information.
