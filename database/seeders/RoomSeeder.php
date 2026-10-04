@@ -16,6 +16,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai 1',
                 'status' => 'Available',
                 'description' => 'Fasilitas: Proyektor, AC, Whiteboard, Video Conference',
+                'image' => '/images/kawasan-maliboro.webp',
                 'gradient' => 'R001',
             ],
             [
@@ -24,6 +25,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai 2',
                 'status' => 'Available',
                 'description' => 'Fasilitas: Sound System, Proyektor, AC Sentral, Panggung',
+                'image' => '/images/gedung-penghubung.webp',
                 'gradient' => 'R002',
             ],
             [
@@ -32,6 +34,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai 1',
                 'status' => 'Available',
                 'description' => 'Fasilitas: AC, Meja Bundar, Sofa',
+                'image' => '/images/area-partywisata.webp',
                 'gradient' => 'R003',
             ],
             [
@@ -40,6 +43,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai Dasar',
                 'status' => 'Maintenance',
                 'description' => 'Akses Terbatas. Fasilitas: Rack Server, Cooling System',
+                'image' => '/images/copernico-yfmU1uL_mp8-unsplash.webp',
                 'gradient' => 'R004',
             ],
             [
@@ -48,6 +52,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai 3',
                 'status' => 'Available',
                 'description' => 'Fasilitas: AC, Whiteboard, Lemari Arsip',
+                'image' => '/images/blank-living-room-interior-with-copy-space.webp',
                 'gradient' => 'R005',
             ],
             [
@@ -56,6 +61,7 @@ class RoomSeeder extends Seeder
                 'location' => 'Lantai 2',
                 'status' => 'Booked',
                 'description' => 'Fasilitas: Sofa, TV, Coffee Maker',
+                'image' => '/images/sofa-living-room-with-copy-space.webp',
                 'gradient' => 'R006',
             ],
             [

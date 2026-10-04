@@ -18,7 +18,7 @@ export const rooms: Room[] = [
     capacity: 200,
     facilities: ['Panggung', 'Sound System', 'AC', 'WiFi', 'Lighting', 'Proyektor'],
     status: 'available',
-    image: new URL('../assets/kawasan-maliboro.webp', import.meta.url).href,
+    image: '/images/kawasan-maliboro.webp',
   },
   {
     id: 'R002',
@@ -28,7 +28,7 @@ export const rooms: Room[] = [
     capacity: 80,
     facilities: ['Proyektor', 'WiFi', 'AC', 'Sound System', 'Whiteboard'],
     status: 'in_use',
-    image: new URL('../assets/gedung-penghubung.webp', import.meta.url).href,
+    image: '/images/gedung-penghubung.webp',
   },
   {
     id: 'R003',
@@ -38,6 +38,6 @@ export const rooms: Room[] = [
     capacity: 150,
     facilities: ['Panggung', 'Sound System', 'AC', 'WiFi', 'Lighting', 'Dekorasi'],
     status: 'available',
-    image: new URL('../assets/area-partywisata.webp', import.meta.url).href,
+    image: '/images/area-partywisata.webp',
   },
 ]
