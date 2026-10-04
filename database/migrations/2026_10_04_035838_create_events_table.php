@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('room_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->string('title');
             $table->text('description')->nullable();
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->string('organizer')->nullable();
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->string('pic')->nullable();
+            $table->string('division')->nullable();
+            $table->string('status')->default('scheduled');
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

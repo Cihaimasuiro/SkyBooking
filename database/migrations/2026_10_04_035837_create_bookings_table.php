@@ -15,11 +15,20 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('room_id')->constrained()->cascadeOnDelete();
+            $table->string('event_name');
+            $table->string('event_type');
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('status')->default('Pending');
-            $table->text('purpose')->nullable();
+            $table->integer('participants')->default(0);
+            $table->string('pic');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('division')->nullable();
+            $table->text('notes')->nullable();
+            $table->text('admin_note')->nullable();
+            $table->text('reject_reason')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
