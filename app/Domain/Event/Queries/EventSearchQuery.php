@@ -14,15 +14,19 @@ final class EventSearchQuery
             ->select([
                 'id',
                 'room_id',
-                'name',
+                'title',
                 'description',
-                'start_date',
-                'end_date',
-                'organizer',
+                'date',
+                'start_time',
+                'end_time',
+                'pic',
+                'division',
+                'status',
+                'color',
             ]);
 
         if ($keyword) {
-            $query->where('name', 'like', "%{$keyword}%");
+            $query->where('title', 'like', "%{$keyword}%");
         }
 
         return $query;

@@ -15,11 +15,20 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'room_id',
+        'event_name',
+        'event_type',
         'date',
         'start_time',
         'end_time',
+        'participants',
+        'pic',
+        'email',
+        'phone',
+        'division',
+        'notes',
+        'admin_note',
+        'reject_reason',
         'status',
-        'purpose',
     ];
 
     protected $casts = [

@@ -13,16 +13,21 @@ class Event extends Model
 
     protected $fillable = [
         'room_id',
-        'name',
+        'title',
         'description',
-        'start_date',
-        'end_date',
-        'organizer',
+        'date',
+        'start_time',
+        'end_time',
+        'pic',
+        'division',
+        'status',
+        'color',
     ];
 
     protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
+        'date' => 'date',
+        'start_time' => 'string',
+        'end_time' => 'string',
     ];
 
     public function room(): BelongsTo
