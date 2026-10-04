@@ -10,11 +10,13 @@ import EventList from '../components/EventList.vue'
 
 const props = defineProps<{
   rooms: any[]
+  events: any[]
 }>()
 const rooms = props.rooms
+const events = props.events
 
-import { events } from '../data/events'
-import coHero from '../assets/copernico-yfmU1uL_mp8-unsplash.webp'
+
+const coHero = '/images/copernico-yfmU1uL_mp8-unsplash.webp'
 
 
 const page = usePage();

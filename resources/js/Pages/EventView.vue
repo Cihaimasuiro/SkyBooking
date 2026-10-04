@@ -3,7 +3,9 @@ import { ref, computed } from 'vue'
 import { Search, CalendarDays, Filter } from 'lucide-vue-next'
 import EventCalendar from '../components/EventCalendar.vue'
 import EventDetail from '../components/EventDetail.vue'
-import { events, type CalendarEvent } from '../data/events'
+import type { CalendarEvent } from '../data/events'
+const props = defineProps<{ events: CalendarEvent[] }>()
+const events = props.events
 
 const search = ref('')
 const filterTerminal = ref('')

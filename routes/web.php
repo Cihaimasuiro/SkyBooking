@@ -30,22 +30,9 @@ Route::get('/admin/bookings', [AdminController::class, 'index'])->name('admin.bo
 
 Route::get('/event', [EventController::class, 'index'])->name('events.index');
 
-// Authentication routes (to be mapped to proper AuthController later)
-Route::get('/login', function () {
-    return Inertia::render('LoginView');
-})->name('login');
-
+Route::get('/map', function () {
+    return Inertia::render('MapView');
+})->name('map');
 Route::get('/register', function () {
     return Inertia::render('RegisterView');
 })->name('register');
-
-// Admin routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('AdminView');
-    })->name('dashboard');
-    
-    Route::get('/booking', function () {
-        return Inertia::render('AdminBookingView');
-    })->name('bookings.index');
-});

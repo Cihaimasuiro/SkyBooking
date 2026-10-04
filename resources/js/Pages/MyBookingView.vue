@@ -17,7 +17,7 @@ const mappedBookings = computed(() => {
     endTime: b.end_time
   }))
 })
-const bookingList = mappedBookings
+const bookingList = props.bookings
 
 
 const filterStatus = ref('')
